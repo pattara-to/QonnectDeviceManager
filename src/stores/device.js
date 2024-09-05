@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-const BASE_URL = "http://127.0.0.1:1880";
+const BASE_URL = "http://127.0.0.1:8000";
 
 export const useDeviceStore = defineStore("device", {
     state: () => ({
@@ -12,18 +12,34 @@ export const useDeviceStore = defineStore("device", {
     actions: {
         async loadDevices() {
             try {
-                const response = await axios.get(`${BASE_URL}/devices`);
+                const authToken = localStorage.getItem("token");
+                const response = await axios.get(`${BASE_URL}/devices`, {
+                    headers: {
+                        authorization: `Bearer ${authToken}`,
+                    },
+                });
                 this.list = response.data;
             } catch (error) {
                 console.log("error", error);
+                if (error.response.status == 401) {
+                    window.location.replace("http://localhost:5173/login");
+                }
             }
         },
         async loadDevice(deviceID) {
             try {
-                const response = await axios.get(`${BASE_URL}/device/${deviceID}`);
-                this.selectedDevice = response.data[0];
+                const authToken = localStorage.getItem("token");
+                const response = await axios.get(`${BASE_URL}/device/${deviceID}`, {
+                    headers: {
+                        authorization: `Bearer ${authToken}`,
+                    },
+                });
+                this.selectedDevice = response.data;
             } catch (error) {
                 console.log("error", error);
+                if (error.response.status == 401) {
+                    window.location.replace("http://localhost:5173/login");
+                }
             }
         },
         async loadAlerts(deviceID) {
@@ -35,10 +51,14 @@ export const useDeviceStore = defineStore("device", {
             }
         },
         async addDevice(deviceData) {
+            const authToken = localStorage.getItem("token");
             if (deviceData.name != "" && deviceData.MAC != "") {
                 try {
-                    console.log(deviceData);
-                    const response = await axios.post(`${BASE_URL}/devices`, deviceData);
+                    const response = await axios.post(`${BASE_URL}/devices`, deviceData, {
+                        headers: {
+                            authorization: `Bearer ${authToken}`,
+                        },
+                    });
                     console.log("Add Device Success");
                 } catch (error) {
                     console.log("error", error);
@@ -46,8 +66,13 @@ export const useDeviceStore = defineStore("device", {
             }
         },
         async addAlert(alertData) {
+            const authToken = localStorage.getItem("token");
             try {
-                const response = await axios.post(`${BASE_URL}/alerts`, alertData);
+                const response = await axios.post(`${BASE_URL}/alerts`, alertData, {
+                    headers: {
+                        authorization: `Bearer ${authToken}`,
+                    },
+                });
                 console.log("Add Alert Success");
             } catch (error) {
                 console.log("error", error);
@@ -88,7 +113,6 @@ export const useDeviceStore = defineStore("device", {
         async register(userData) {
             try {
                 const response = await axios.post(`${BASE_URL}/register`, userData);
-                console.log("Register Success");
             } catch (error) {
                 console.log("error", error);
             }
@@ -96,10 +120,42 @@ export const useDeviceStore = defineStore("device", {
         async login(userData) {
             try {
                 const response = await axios.post(`${BASE_URL}/login`, userData);
-                console.log(response);
+                localStorage.setItem("token", response.data.token);
                 return response.data;
             } catch (error) {
-                console.log("error", error.response.data.message);
+                console.log("error", error);
+            }
+        },
+        async user() {
+            try {
+                const authToken = localStorage.getItem("token");
+                const response = await axios.get(`${BASE_URL}/user`, {
+                    headers: {
+                        authorization: `Bearer ${authToken}`,
+                    },
+                });
+                return response.data;
+            } catch (error) {
+                console.log("error", error);
+                if (error.response.status == 401) {
+                    window.location.replace("http://localhost:5173/login");
+                }
+            }
+        },
+        async editUser(userData) {
+            try {
+                const authToken = localStorage.getItem("token");
+                const response = await axios.post(`${BASE_URL}/edit-user`, userData, {
+                    headers: {
+                        authorization: `Bearer ${authToken}`,
+                    },
+                });
+                console.log("Edit User Success");
+            } catch (error) {
+                console.log("error", error);
+                if (error.response.status == 401) {
+                    window.location.replace("http://localhost:5173/login");
+                }
             }
         },
     },

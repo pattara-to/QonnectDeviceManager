@@ -1,22 +1,15 @@
 <script setup>
-import { onMounted, ref, defineProps } from "vue";
-import { useRoute } from "vue-router";
+import { onMounted, ref } from "vue";
 import Machine from "@/components/Machine.vue";
 import { useDeviceStore } from "@/stores/device";
 import AddModal from "@/components/AddModal.vue";
 import Navbar from "@/components/Navbar.vue";
-const route = useRoute();
-
-const props = defineProps({
-    userId: Number,
-});
 
 const deviceStore = useDeviceStore();
 
 const modalIsOpen = ref(false);
 
 onMounted(async () => {
-    console.log(route.params);
     await deviceStore.loadDevices();
 });
 

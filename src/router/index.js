@@ -10,6 +10,7 @@ const router = createRouter({
     routes: [
         {
             path: "/devices",
+            alias: ["/"],
             name: "devices-view",
             component: DevicesView,
         },

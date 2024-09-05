@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, reactive } from "vue";
+import { ref, reactive } from "vue";
 const props = defineProps({
     toggleModal: Function,
     addDevice: Function,
@@ -21,29 +21,22 @@ const addDevice = () => {
 <template>
     <div class="modal block fixed z-1 w-full h-full bg-black/70">
         <div
-            class="p-4 rounded-lg h-[93%] flex flex-col bg-white fixed right-0 text-lg justify-between items-center transition-[width] ease-in-out duration-1000"
+            class="p-4 rounded-lg h-[93%] flex flex-col bg-white fixed right-0 text-xl items-center transition-[width] ease-in-out duration-1000"
             :class="props.modalIsOpen ? 'w-1/4' : 'w-0'"
         >
-            Add Device
-            <img src="../assets/machine.png" alt="machine" class="w-24" />
-            <div class="flex w-full">
-                <span class="font-semibold text-right pr-2 w-2/6 text-base">Machine Name</span>
-                <input type="text" v-model="deviceData.name" class="bg-gray-200 rounded-md w-4/6" />
-            </div>
-            <div class="flex w-full">
-                <span class="font-semibold text-right pr-2 w-2/6">MAC Address</span>
-                <input type="text" v-model="deviceData.MAC" class="bg-gray-200 rounded-md w-4/6" />
-            </div>
-            <div class="flex w-full">
-                <span class="font-semibold text-right pr-2 w-2/6">Description</span>
-                <textarea rows="4" v-model="deviceData.description" cols="20" class="bg-gray-200 rounded-md w-4/6"></textarea>
-            </div>
-            <div class="flex w-full">
-                <span class="font-semibold text-right pr-2 w-2/6">Location</span>
-                <textarea rows="4" v-model="deviceData.location" cols="20" class="bg-gray-200 rounded-md w-4/6"></textarea>
-            </div>
+            <span class="text-3xl m-2 font-bold">Add Device</span>
 
-            <div class="flex self-end">
+            <img src="../assets/machine.png" alt="machine" class="w-60" />
+            <span class="font-semibold text-right pr-2 self-start">Machine Name</span>
+            <input type="text" v-model="deviceData.name" class="bg-gray-200 rounded-md w-5/6 h-8" />
+            <span class="font-semibold text-right pr-2 self-start">MAC Address</span>
+            <input type="text" v-model="deviceData.MAC" class="bg-gray-200 rounded-md w-5/6 h-8" />
+            <span class="font-semibold text-right pr-2 self-start">Description</span>
+            <textarea rows="4" v-model="deviceData.description" cols="40" class="bg-gray-200 resize-none rounded-md w-5/6"></textarea>
+            <span class="font-semibold text-right pr-2 self-start">Location</span>
+            <textarea rows="4" v-model="deviceData.location" cols="5" class="bg-gray-200 resize-none rounded-md w-5/6"></textarea>
+
+            <div class="flex mt-28 self-end">
                 <button class="border-red-500 border-2 rounded-md px-auto w-20 text-red-500" @click="props.toggleModal">Cancel</button>
                 <button class="border-green-500 border-2 rounded-md px-auto w-20 ml-2 text-green-500" @click="addDevice()">Add</button>
             </div>

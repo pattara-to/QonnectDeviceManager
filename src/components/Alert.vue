@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 
 const props = defineProps({
     alert: {},
@@ -13,10 +13,17 @@ onMounted(() => {
     statuses.value = props.alert.AlertStatus.split("");
 });
 
+watch(
+    () => props.alert,
+    (newAlert) => {
+        statuses.value = newAlert.AlertStatus.split("");
+    }
+);
+
 const editAlert = async () => {
     const alertData = {
-        AlertStatus: statuses.value.join(""),
-        AlertMessage: props.alert.AlertMessage,
+        alertStatus: statuses.value.join(""),
+        alertMessage: props.alert.AlertMessage,
     };
     props.editAlert(props.alert.AlertID, alertData);
 };

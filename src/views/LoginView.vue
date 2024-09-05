@@ -13,11 +13,12 @@ const userData = reactive({
 const deviceStore = useDeviceStore();
 
 const login = async () => {
-    const res = await deviceStore.login(userData);
-    // console.log(res.cookies);
-    // if (res) {
-    //     router.push({ name: "devices-view", params: { authToken: res.userData } });
-    // }
+    if (userData.email != "" && userData.password != "") {
+        const res = await deviceStore.login(userData);
+        if (res.isOk) {
+            router.push({ name: "devices-view" });
+        }
+    }
 };
 </script>
 <template>

@@ -14,8 +14,13 @@ const router = useRouter();
 
 const deviceStore = useDeviceStore();
 
-const status = ref("");
-const device = ref({});
+const device = reactive({
+    name: "",
+    MAC: "",
+    description: "",
+    location: "",
+});
+
 const alerts = ref([]);
 const a = ref(0);
 
@@ -25,13 +30,18 @@ const alert_message = ref("");
 onMounted(async () => {
     await deviceStore.loadDevice(route.params.id);
     await deviceStore.loadAlerts(route.params.id);
-    device.value = deviceStore.selectedDevice;
+    setDevice(deviceStore.selectedDevice);
     alerts.value = deviceStore.alertList;
-
-    if (device.value.IOStatus !== undefined) {
-        status.value = device.value.IOStatus;
-    }
 });
+
+const setDevice = (selectedDevice) => {
+    device.name = selectedDevice.Name;
+    device.MAC = selectedDevice.MAC;
+    device.description = selectedDevice.Description;
+    device.location = selectedDevice.Location;
+    device.status = selectedDevice.Status;
+    device.IOStatus = selectedDevice.IOStatus;
+};
 
 const toggleAlert = () => {
     alertIsOpen.value = !alertIsOpen.value;
@@ -43,7 +53,7 @@ const addAlert = async () => {
             alertStatus: alert_statuses.value.join(""),
             alertMessage: alert_message.value,
             deviceID: route.params.id,
-            MAC: device.value.MAC,
+            MAC: device.MAC,
         };
         await deviceStore.addAlert(alertData);
         await deviceStore.loadAlerts(route.params.id);
@@ -53,13 +63,7 @@ const addAlert = async () => {
 };
 
 const editDevice = async () => {
-    const deviceData = {
-        Name: device.value.Name,
-        MAC: device.value.MAC,
-        Description: device.value.Description,
-        Location: device.value.Location,
-    };
-    await deviceStore.editDevice(route.params.id, deviceData);
+    await deviceStore.editDevice(route.params.id, device);
 };
 
 const editAlert = async (alertID, alertData) => {
@@ -82,6 +86,7 @@ const removeAlert = async (alertID) => {
         await deviceStore.removeAlert(alertID);
         await deviceStore.loadAlerts(route.params.id);
         alerts.value = deviceStore.alertList;
+        console.log(alerts.value);
     }
 };
 </script>
@@ -92,7 +97,7 @@ const removeAlert = async (alertID) => {
         <div class="flex justify-between mt-4 mx-16">
             <span class="self-center text-xl ml-4 py-2">
                 <RouterLink :to="{ name: 'devices-view' }">Devices</RouterLink> >
-                <span class="bg-gray-200 text-violet-700 font-semibold">{{ device.Name }}</span>
+                <span class="bg-gray-200 text-violet-700 font-semibold">{{ device.name }}</span>
             </span>
         </div>
         <div class="w-4/5 h-1/2 shadow-md my-2 mx-auto bg-gray-100 rounded-3xl">
@@ -104,7 +109,7 @@ const removeAlert = async (alertID) => {
                     <div>
                         <span class="p-2 text-2xl">
                             <span class="font-bold my-4">Machine Name:</span>
-                            <input type="text" class="w-2/6 m-2 p-1 pl-4 bg-gray-200 rounded-xl" v-model="device.Name" />
+                            <input type="text" class="w-2/6 m-2 p-1 pl-4 bg-gray-200 rounded-xl" v-model="device.name" />
                         </span>
                         <span class="p-2 text-2xl">
                             <span class="font-bold">MAC:</span>
@@ -113,16 +118,16 @@ const removeAlert = async (alertID) => {
                     </div>
                     <div class="p-2 text-2xl">
                         <span class="font-bold">Description:</span>
-                        <input type="text" class="w-[80%] p-1 pl-4 m-2 bg-gray-200 rounded-xl" v-model="device.Description" />
+                        <input type="text" class="w-[80%] p-1 pl-4 m-2 bg-gray-200 rounded-xl" v-model="device.description" />
                     </div>
                     <div class="p-2 text-2xl">
                         <span class="font-bold">Location:</span>
-                        <input type="text" class="w-[85%] p-1 pl-4 m-2 bg-gray-200 rounded-xl" v-model="device.Location" />
+                        <input type="text" class="w-[85%] p-1 pl-4 m-2 bg-gray-200 rounded-xl" v-model="device.location" />
                     </div>
                     <div class="flex p-2 text-2xl w-1/2 gap-4 items-center">
                         <span class="font-bold">Status:</span>
-                        <div class="w-4 h-4 rounded-full" :class="device.Status ? 'bg-green-500' : 'bg-red-500'"></div>
-                        <span v-if="device.Status">Connect</span>
+                        <div class="w-4 h-4 rounded-full" :class="device.status ? 'bg-green-500' : 'bg-red-500'"></div>
+                        <span v-if="device.status">Connect</span>
                         <span v-else>Disconnect</span>
                         <button class="text-[#008CBA] border p-2 rounded-xl border-[#008CBA]" @click="editDevice()">Edit</button>
                         <button class="text-[#008CBA] border p-2 rounded-xl border-[#008CBA]" @click="removeDevice()">Delete</button>
