@@ -6,7 +6,6 @@ import AddModal from "@/components/AddModal.vue";
 import Navbar from "@/components/Navbar.vue";
 
 const deviceStore = useDeviceStore();
-
 const modalIsOpen = ref(false);
 
 onMounted(async () => {
@@ -29,27 +28,40 @@ const addDevice = async (deviceData) => {
 </script>
 
 <template>
-    <Navbar />
-    <AddModal :toggleModal="toggleModal" :addDevice="addDevice" :modalIsOpen="modalIsOpen" v-show="modalIsOpen" />
-    <div class="flex flex-col h-[93%]">
-        <div class="flex justify-between my-4 mx-16">
-            <span class="self-center text-xl ml-4">Devices</span>
-            <button
-                @click="toggleModal"
-                class="rounded w-fit px-4 py-2 text-l border text-[#008cba] border-[#008cba] hover:bg-[#008cba] hover:text-white"
-            >
-                + Add Device
-            </button>
-        </div>
-
-        <div class="grid grid-cols-6 grid-rows-2 justify-center mx-16 my-4 w-11/12 h-full gap-x-14 gap-y-4">
-            <Machine :device="device" v-for="device in deviceStore.list" />
-        </div>
+  <Navbar />
+  
+  <AddModal :toggleModal="toggleModal" :addDevice="addDevice" :modalIsOpen="modalIsOpen" v-show="modalIsOpen" />
+  
+  <div class="flex flex-col h-[93%] bg-[#F5F7FA]">
+    <div class="flex justify-between items-center my-6 px-16">
+      <h1 class="text-3xl font-semibold text-gray-800">Devices</h1>
+      <button
+        @click="toggleModal"
+        class="rounded-lg px-6 py-2 text-lg font-medium text-white bg-[#008cba] hover:bg-[#0079a1] transition"
+      >
+        + Add Device
+      </button>
     </div>
+
+    <div class="grid grid-cols-6 gap-6 mx-16 mb-6">
+      <Machine :device="device" v-for="device in deviceStore.list" :key="device.id" />
+    </div>
+  </div>
 </template>
 
 <style scoped>
 h1 {
-    font-size: 16px;
+  font-size: 24px;
 }
+
+button {
+  transition: background-color 0.2s ease;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+}
+
 </style>

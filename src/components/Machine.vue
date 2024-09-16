@@ -2,53 +2,74 @@
 import { defineProps, onMounted, ref, watch } from "vue";
 import { RouterLink } from "vue-router";
 
+// Device status
 const status = ref(0);
 
+// Props received
 const props = defineProps({
-    device: {},
+  device: Object,
 });
 
+// Update status on mount and when props change
 onMounted(() => {
-    if (props.device.IOStatus !== undefined) {
-        status.value = props.device.IOStatus;
-    }
+  if (props.device?.IOStatus !== undefined) {
+    status.value = props.device.IOStatus;
+  }
 });
 
 watch(
-    () => props.device,
-    (newDevice) => {
-        if (newDevice.IOStatus !== undefined) {
-            status.value = newDevice.IOStatus;
-        }
+  () => props.device,
+  (newDevice) => {
+    if (newDevice?.IOStatus !== undefined) {
+      status.value = newDevice.IOStatus;
     }
+  }
 );
 </script>
+
 <template>
-    <RouterLink :to="{ name: 'edit-view', params: { id: device.DeviceID } }">
-        <div class="flex flex-col w-full items-center text-center shadow-md justify-around rounded justify-self-center hover:scale-105">
-            <div class="w-30 flex flex-col items-center m-2">
-                <div class="w-4 h-4 rounded-full" :class="device.Status ? 'bg-green-500' : 'bg-red-500'"></div>
-                <div v-if="device.Status">Connect</div>
-                <div v-else>Disconnect</div>
-            </div>
-            <div class="h-24">
-                <img src="../assets/machine.png" alt="machine" class="w-24" />
-            </div>
-            <h1>{{ device.Name }}</h1>
-            <p class="truncate w-full">{{ device.Location }}</p>
-            <p>{{ device.MAC }}</p>
-            <div class="flex flex-row w-24 h-16 justify-between">
-                <div v-for="(s, index) in status" :key="index" class="font-bold">
-                    <div class="w-4 h-4 rounded-full" :style="s == '1' ? { 'background-color': 'green' } : { 'background-color': 'red' }"></div>
-                    I{{ index + 1 }}
-                </div>
-            </div>
+  <RouterLink :to="{ name: 'edit-view', params: { id: device.DeviceID } }">
+    <div
+      class="flex flex-col items-center text-center shadow-lg bg-white rounded-lg hover:scale-105 duration-300"
+    >
+      <!-- Status Bar -->
+      <div
+        class="w-full py-2 rounded-t-lg text-white text-xl font-semibold"
+        :class="device.Status ? 'bg-green-500' : 'bg-red-500'"
+      >
+        <span>{{ device.Status ? 'Connected' : 'Disconnected' }}</span>
+      </div>
+
+      <!-- Machine Image -->
+      <div class="mt-4">
+        <img src="../assets/machine.png" alt="machine" class="w-24 h-24 object-cover" />
+      </div>
+
+      <!-- Machine Information -->
+      <h1 class="mt-4 text-xl font-semibold">{{ device.Name }}</h1>
+      <p class="text-gray-600 truncate w-full">{{ device.Location }}</p>
+      <p class="text-gray-500">{{ device.MAC }}</p>
+
+      <!-- I/O Status -->
+      <div class="flex justify-between w-full px-10 mt-4 pb-7">
+        <div
+          v-for="(s, index) in status"
+          :key="index"
+          class="flex flex-col items-center space-y-1"
+        >
+          <div
+            class="w-6 h-6 rounded-full"
+            :class="s == '1' ? 'bg-green-500' : 'bg-red-500'"
+          ></div>
+          <span class="text-m font-bold">I{{ index + 1 }}</span>
         </div>
-    </RouterLink>
+      </div>
+    </div>
+  </RouterLink>
 </template>
 
 <style scoped>
 h1 {
-    font-size: 16px;
+  font-size: 1rem;
 }
 </style>

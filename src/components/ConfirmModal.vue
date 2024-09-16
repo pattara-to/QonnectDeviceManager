@@ -14,14 +14,41 @@ const cancel = () => {
     emit("cancel");
 };
 </script>
+
 <template>
-    <div class="block fixed z-1 w-full h-full bg-black/70">
-        <div class="absolute left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%] w-[600px] h-72 bg-white flex flex-col items-center text-xl">
-            <div class="h-1/5 self-end">
-                <button class="border border-black p-4 w-32 rounded-lg" @click="cancel">X</button>
+    <!-- Modal Background -->
+    <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/70">
+        <!-- Modal Box -->
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm md:max-w-md text-center space-y-3">
+
+            <!-- Header Section -->
+            <div class="flex justify-between items-center">
+                <h2 class="text-xl font-semibold">{{ confirmMessage }}</h2>
+                <button aria-label="Close" class="text-gray-500 hover:text-gray-700" @click="cancel">
+                    <span class="text-4xl">&times;</span>
+                </button>
             </div>
-            <div class="h-2/5 flex items-center">{{ props.confirmMessage }}</div>
-            <div class="h-2/5 flex items-center"><button class="border border-black p-4 w-32 rounded-lg" @click="confirm">Confirm</button></div>
+            <hr class="border" />
+
+            <!-- Confirmation Message -->
+            <p class="text-gray-600">
+                Are you sure to remove device?
+            </p>
+            <p class="text-gray-600">
+                if you delete the device. you can't recover it
+            </p>
+
+            <!-- Buttons Section -->
+            <div class="flex justify-center space-x-6 pt-5">
+                <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition duration-200"
+                    @click="cancel">
+                    Cancel
+                </button>
+                <button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition duration-200"
+                    @click="confirm">
+                    Delete
+                </button>
+            </div>
         </div>
     </div>
 </template>
