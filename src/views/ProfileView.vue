@@ -42,6 +42,7 @@ const handleProfilePicChange = (event) => {
     }
 };
 
+//For Edit User
 const editUser = async () => {
     try {
         const confirmed = await showConfirm("Edit User information?");
@@ -55,6 +56,7 @@ const editUser = async () => {
     }
 };
 
+// For Edit Line Token
 const editLineToken = async () => {
     try {
         const confirmed = await showConfirm("Edit Line Token?");
