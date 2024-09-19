@@ -21,7 +21,7 @@ export const useDeviceStore = defineStore("device", {
                 this.list = response.data;
             } catch (error) {
                 console.log("error", error);
-                if (error.response == 401) {
+                if (error.response.status == 401) {
                     window.location.replace("http://localhost:5173/login");
                 }
             }
