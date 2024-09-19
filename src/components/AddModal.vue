@@ -44,7 +44,7 @@ const closeModalOnOutsideClick = (event) => {
                     <!-- Machine Name -->
                     <div class="flex flex-col w-full">
                         <label class="font-semibold text-gray-700">Machine Name</label>
-                        <input type="text" v-model="deviceData.name" class="bg-gray-100 border border-gray-300 rounded-lg py-2 px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" />
+                        <input type="text" v-model="deviceData.name" class="bg-gray-100 border border-gray-300 rounded-lg py-2 px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" required/>
                     </div>
 
                     <!-- MAC Address -->

@@ -32,7 +32,7 @@ const addDevice = async (deviceData) => {
   
   <AddModal :toggleModal="toggleModal" :addDevice="addDevice" :modalIsOpen="modalIsOpen" v-show="modalIsOpen" />
   
-  <div class="flex flex-col h-[93%] bg-[#F5F7FA]">
+  <div class="flex flex-col h-[93%]">
     <div class="flex justify-between items-center my-6 px-16">
       <h1 class="text-3xl font-semibold text-gray-800">Devices</h1>
       <button

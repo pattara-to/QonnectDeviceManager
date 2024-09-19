@@ -21,7 +21,7 @@ export const useDeviceStore = defineStore("device", {
         this.list = response.data;
       } catch (error) {
         console.log("error", error);
-        if (error.response.status == 401) {
+        if (error.response == 401) {
           window.location.replace("http://localhost:5173/login");
         }
       }
@@ -155,19 +155,11 @@ export const useDeviceStore = defineStore("device", {
     async editUser(userData) {
       try {
         const authToken = localStorage.getItem("token");
-
-        // Log the data being sent to the backend
-        console.log("Sending user data to the backend:", userData);
-
         const response = await axios.post(`${BASE_URL}/edit-user`, userData, {
           headers: {
             authorization: `Bearer ${authToken}`,
           },
         });
-
-        // Log the response from the backend
-        console.log("Backend response:", response.data);
-        console.log("Edit User Success");
       } catch (error) {
         console.log("Error in editUser:", error);
         if (error.response && error.response.status === 401) {

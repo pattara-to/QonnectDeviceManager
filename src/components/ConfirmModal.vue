@@ -29,15 +29,6 @@ const cancel = () => {
                 </button>
             </div>
             <hr class="border" />
-
-            <!-- Confirmation Message -->
-            <p class="text-gray-600">
-                Are you sure to remove device?
-            </p>
-            <p class="text-gray-600">
-                if you delete the device. you can't recover it
-            </p>
-
             <!-- Buttons Section -->
             <div class="flex justify-center space-x-6 pt-5">
                 <button class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition duration-200"
@@ -46,7 +37,7 @@ const cancel = () => {
                 </button>
                 <button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition duration-200"
                     @click="confirm">
-                    Delete
+                    Confirm
                 </button>
             </div>
         </div>

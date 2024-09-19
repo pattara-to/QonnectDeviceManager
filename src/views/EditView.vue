@@ -57,7 +57,11 @@ const addAlert = async () => {
 };
 
 const editDevice = async () => {
-    await deviceStore.editDevice(route.params.id, device);
+    const confirmed = await showConfirm("Edit Device?");
+
+    if (confirmed) {
+      await deviceStore.editDevice(route.params.id, device);
+    }
 };
 
 const removeDevice = async () => {
