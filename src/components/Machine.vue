@@ -32,7 +32,6 @@ watch(
     <div
       class="flex flex-col items-center text-center shadow-lg bg-white rounded-lg hover:scale-105 duration-300"
     >
-      <!-- Status Bar -->
       <div
         class="w-full py-2 rounded-t-lg text-white text-xl font-semibold"
         :class="device.Status ? 'bg-green-500' : 'bg-red-500'"
@@ -40,17 +39,17 @@ watch(
         <span>{{ device.Status ? 'Connected' : 'Disconnected' }}</span>
       </div>
 
-      <!-- Machine Image -->
+      <div class="flex">
+        <i class="bi bi-geo-alt-fill text-red-500"></i><p class="text-gray-500 font-medium text-lg truncate w-fit rounded-lg  px-1 m-1">{{ device.Location }}</p>
+      </div>
+      
+
       <div class="mt-4">
         <img src="../assets/machine.png" alt="machine" class="w-24 h-24 object-cover" />
       </div>
 
-      <!-- Machine Information -->
-      <h1 class="mt-4 text-xl font-semibold">{{ device.Name }}</h1>
-      <p class="text-gray-600 truncate w-full">{{ device.Location }}</p>
-      <p class="text-gray-500">{{ device.MAC }}</p>
-
-      <!-- I/O Status -->
+      <h1 class="mt-4 text-[1.25rem] font-semibold">{{ device.Name }}</h1>
+      <p class="text-gray-400 text-xs">{{ device.MAC }}</p>
       <div class="flex justify-between w-full px-10 mt-4 pb-7">
         <div
           v-for="(s, index) in status"
@@ -68,8 +67,3 @@ watch(
   </RouterLink>
 </template>
 
-<style scoped>
-h1 {
-  font-size: 1rem;
-}
-</style>

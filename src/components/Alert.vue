@@ -31,7 +31,7 @@ const editAlert = async () => {
 
 <template>
     <div class="flex justify-around">
-        <div class="flex justify-between w-2/5">
+        <div class="flex justify-between w-2/4">
             <select
                 v-model="statuses[0]"
                 id="i0"

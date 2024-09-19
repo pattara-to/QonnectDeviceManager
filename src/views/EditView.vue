@@ -85,7 +85,6 @@ const removeAlert = async (alertID) => {
 
 <template>
   <Navbar />
-  <!-- Confirmation Modal -->
   <transition name="fade" mode="out-in">
     <ConfirmModal :toggleAlert="toggleAlert" :confirmMessage="confirmMessage" v-show="isModalVisible" @confirm="confirm"
       @cancel="cancel" />
@@ -99,15 +98,13 @@ const removeAlert = async (alertID) => {
       </span>
     </div>
 
-    <div class="w-3/4 h-1/2 transition-all duration-300 mx-auto mt-3">
-      <div class="grid grid-cols-[30%,1fr] gap-6 p-6 bg-white rounded-lg">
+    <div class="w-3/4 h-[50%] transition-all duration-300 mx-auto mt-3">
+      <div class="grid grid-cols-[30%,1fr] gap-6 bg-white rounded-lg">
         <div class="flex justify-center items-center rounded-lgp-4">
           <img src="../assets/machine.png" class="max-w-full h-auto rounded-md " />
         </div>
-
-        <!-- Device Information -->
-        <div class=" rounded-lg p-6">
-          <div class="space-y-6">
+        <div class=" rounded-lg ">
+          <div class="space-y-[1rem]">
             <div class="grid grid-cols-2 gap-4">
               <div class="text-2xl">
                 <label class="block font-semibold mb-1">Machine Name</label>
@@ -136,16 +133,16 @@ const removeAlert = async (alertID) => {
 
             <div class="flex items-center gap-4 mt-4">
               <span class="font-semibold text-2xl">Status:</span>
-              <div class="w-5 h-5 rounded-full" :class="device.status ? 'bg-green-500' : 'bg-red-500'"></div>
-              <span class="text-lg">{{ device.status ? 'Connect' : 'Disconnect' }}</span>
-              <div class="ml-auto space-x-1">
+              <div class="w-[1.5rem] h-[1.5rem] rounded-full" :class="device.status ? 'bg-green-500' : 'bg-red-500'"></div>
+              <span class="text-xl">{{ device.status ? 'Connect' : 'Disconnect' }}</span>
+              <div class="ml-auto space-x-[1rem]">
                 <button
-                  class="text-white bg-blue-500 border border-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 transition-all"
+                  class="text-white text-lg bg-blue-500 border border-blue-500 px-5 py-2.5 rounded-lg hover:bg-blue-600 transition-all"
                   @click="editDevice">
                   Edit
                 </button>
                 <button
-                  class="text-white bg-red-500 border border-red-500 px-4 py-2 rounded-lg hover:bg-red-600 transition-all"
+                  class="text-white text-lg bg-red-500 border border-red-500 px-5 py-2.5 rounded-lg hover:bg-red-600 transition-all"
                   @click="removeDevice">
                   Delete
                 </button>
@@ -157,25 +154,21 @@ const removeAlert = async (alertID) => {
     </div>
 
 
-
-    <!-- Alerts Section -->
     <div
-      class="w-4/5 h-1/2 shadow-md my-2 p-8 mx-auto bg-gray-100 rounded-3xl text-lg transition-all duration-300 hover:shadow-lg">
+      class="w-3/4 h-auto shadow-md my-2 p-8 mx-auto bg-gray-100 rounded-3xl text-lg transition-all duration-300 hover:shadow-lg">
       <div class="flex justify-around items-center mb-6 font-bold text-2xl text-center mr-4">
-        <div class="flex justify-between w-2/5">
+        <div class="flex justify-between w-2/4">
           <div class="w-20">I1</div>
           <div class="w-20">I2</div>
           <div class="w-20">I3</div>
           <div class="w-20">I4</div>
         </div>
-
         <div class="w-1/5">AlertName</div>
         <div class="w-24"></div>
       </div>
 
-      <!-- Alerts Input Form -->
       <div class="flex justify-around items-center mb-2 mr-4">
-        <div class="flex justify-between w-2/5">
+        <div class="flex justify-between w-2/4">
           <select v-model="alert_statuses[0]" class="w-20 h-8 text-center rounded-xl"
             :class="alert_statuses[0] == 1 ? 'text-green-500' : 'text-red-500'">
             <option value="0" class="text-red-500">OFF</option>
@@ -205,8 +198,6 @@ const removeAlert = async (alertID) => {
           Add Alert
         </button>
       </div>
-
-      <!-- Alert List -->
       <div class="overflow-y-scroll h-4/6">
         <div class="flex flex-col my-4" v-for="alert in alerts" :key="alert.id">
           <Alert :alert="alert" :editAlert="editAlert" :removeAlert="removeAlert" />
