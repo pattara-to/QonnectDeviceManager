@@ -64,6 +64,7 @@ export const useDeviceStore = defineStore("device", {
             }
         },
         async addAlert(alertData) {
+            // check Auth
             const authToken = localStorage.getItem("token");
             try {
                 const response = await axios.post(`${BASE_URL}/alerts`, alertData, {
