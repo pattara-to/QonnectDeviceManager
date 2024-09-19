@@ -21,7 +21,7 @@ export const useDeviceStore = defineStore("device", {
                 this.list = response.data;
             } catch (error) {
                 console.log("error", error);
-                if (error.response == 401) {
+                if (error.response.status == 401) {
                     window.location.replace("http://localhost:5173/login");
                 }
             }
@@ -52,20 +52,19 @@ export const useDeviceStore = defineStore("device", {
         },
         async addDevice(deviceData) {
             const authToken = localStorage.getItem("token");
-            if (deviceData.name != "" && deviceData.MAC != "") {
-                try {
-                    const response = await axios.post(`${BASE_URL}/devices`, deviceData, {
-                        headers: {
-                            authorization: `Bearer ${authToken}`,
-                        },
-                    });
-                    console.log("Add Device Success");
-                } catch (error) {
-                    console.log("error", error);
-                }
+            try {
+                const response = await axios.post(`${BASE_URL}/devices`, deviceData, {
+                    headers: {
+                        authorization: `Bearer ${authToken}`,
+                    },
+                });
+                console.log("Add Device Success");
+            } catch (error) {
+                console.log("error", error);
             }
         },
         async addAlert(alertData) {
+            // check Auth
             const authToken = localStorage.getItem("token");
             try {
                 const response = await axios.post(`${BASE_URL}/alerts`, alertData, {
