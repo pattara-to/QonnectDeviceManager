@@ -42,6 +42,7 @@ const handleProfilePicChange = (event) => {
     }
 };
 
+//For Edit User
 const editUser = async () => {
     try {
         const response = await deviceStore.editUser(user);
