@@ -16,7 +16,6 @@ const user = reactive({
     phone: "",
     address: "",
     lineToken: "",
-    profilePic: "",
 });
 
 const profilePic = ref("");
@@ -30,7 +29,6 @@ onMounted(async () => {
         user.phone = result.Phone;
         user.address = result.Address;
         user.lineToken = result.LineToken;
-        user.profilePic = result.ProfilePic || "";
     } catch (error) {
         alert("Failed to load user information.");
     }
