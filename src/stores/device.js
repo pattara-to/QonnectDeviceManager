@@ -52,17 +52,15 @@ export const useDeviceStore = defineStore("device", {
         },
         async addDevice(deviceData) {
             const authToken = localStorage.getItem("token");
-            if (deviceData.name != "" && deviceData.MAC != "") {
-                try {
-                    const response = await axios.post(`${BASE_URL}/devices`, deviceData, {
-                        headers: {
-                            authorization: `Bearer ${authToken}`,
-                        },
-                    });
-                    console.log("Add Device Success");
-                } catch (error) {
-                    console.log("error", error);
-                }
+            try {
+                const response = await axios.post(`${BASE_URL}/devices`, deviceData, {
+                    headers: {
+                        authorization: `Bearer ${authToken}`,
+                    },
+                });
+                console.log("Add Device Success");
+            } catch (error) {
+                console.log("error", error);
             }
         },
         async addAlert(alertData) {
