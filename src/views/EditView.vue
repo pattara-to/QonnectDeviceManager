@@ -99,81 +99,62 @@ const removeAlert = async (alertID) => {
       </span>
     </div>
 
-    <!-- Device Info Section test -->
     <div class="w-3/4 h-1/2 transition-all duration-300 mx-auto mt-3">
-  <div class="grid grid-cols-[30%,1fr] gap-6 p-6 bg-white rounded-lg">
-    <!-- Image Section -->
-    <div class="flex justify-center items-center rounded-lgp-4">
-      <img src="../assets/machine.png" class="max-w-full h-auto rounded-md " />
-    </div>
+      <div class="grid grid-cols-[30%,1fr] gap-6 p-6 bg-white rounded-lg">
+        <div class="flex justify-center items-center rounded-lgp-4">
+          <img src="../assets/machine.png" class="max-w-full h-auto rounded-md " />
+        </div>
 
-    <!-- Device Information Section -->
-    <div class=" rounded-lg p-6">
-      <div class="space-y-6">
-        <!-- Input Fields in Grid -->
-        <div class="grid grid-cols-2 gap-4">
-          <div class="text-2xl">
-            <label class="block font-semibold mb-1">Machine Name</label>
-            <input
-              type="text"
-              v-model="device.name"
-              class="w-full rounded-md text-xl h-10 bg-gray-100 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+        <!-- Device Information -->
+        <div class=" rounded-lg p-6">
+          <div class="space-y-6">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="text-2xl">
+                <label class="block font-semibold mb-1">Machine Name</label>
+                <input type="text" v-model="device.name"
+                  class="w-full rounded-md text-xl h-10 bg-gray-100 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              </div>
+
+              <div class="text-2xl">
+                <label class="block font-semibold mb-1">MAC</label>
+                <input type="text" v-model="device.MAC"
+                  class="w-full rounded-md text-xl h-10 bg-gray-100 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+              </div>
+            </div>
+
+            <div class="text-2xl">
+              <label class="block font-semibold mb-1">Description</label>
+              <input type="text" v-model="device.description"
+                class="w-full rounded-md text-xl h-10 bg-gray-100 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+
+            <div class="text-2xl">
+              <label class="block font-semibold mb-1">Location</label>
+              <input type="text" v-model="device.location"
+                class="w-full rounded-md text-xl h-10 bg-gray-100 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            </div>
+
+            <div class="flex items-center gap-4 mt-4">
+              <span class="font-semibold text-2xl">Status:</span>
+              <div class="w-5 h-5 rounded-full" :class="device.status ? 'bg-green-500' : 'bg-red-500'"></div>
+              <span class="text-lg">{{ device.status ? 'Connect' : 'Disconnect' }}</span>
+              <div class="ml-auto space-x-1">
+                <button
+                  class="text-white bg-blue-500 border border-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 transition-all"
+                  @click="editDevice">
+                  Edit
+                </button>
+                <button
+                  class="text-white bg-red-500 border border-red-500 px-4 py-2 rounded-lg hover:bg-red-600 transition-all"
+                  @click="removeDevice">
+                  Delete
+                </button>
+              </div>
+            </div>
           </div>
-
-          <div class="text-2xl">
-            <label class="block font-semibold mb-1">MAC</label>
-            <input
-              type="text"
-              v-model="device.MAC"
-              class="w-full rounded-md text-xl h-10 bg-gray-100 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-        </div>
-
-        <!-- Description Field -->
-        <div class="text-2xl">
-          <label class="block font-semibold mb-1">Description</label>
-          <input
-            type="text"
-            v-model="device.description"
-            class="w-full rounded-md text-xl h-10 bg-gray-100 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <!-- Location Field -->
-        <div class="text-2xl">
-          <label class="block font-semibold mb-1">Location</label>
-          <input
-            type="text"
-            v-model="device.location"
-            class="w-full rounded-md text-xl h-10 bg-gray-100 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <!-- Status and Buttons Section -->
-        <div class="flex items-center gap-4 mt-4">
-          <span class="font-semibold text-2xl">Status:</span>
-          <div class="w-4 h-4 rounded-full" :class="device.status ? 'bg-green-500' : 'bg-red-500'"></div>
-          <span class="text-lg">{{ device.status ? 'Connect' : 'Disconnect' }}</span>
-
-          <button
-            class="text-white bg-blue-500 border border-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600 transition-all"
-            @click="editDevice"
-          >
-            Edit
-          </button>
-          <button
-            class="text-white bg-red-500 border border-red-500 px-4 py-2 rounded-lg hover:bg-red-600 transition-all"
-            @click="removeDevice"
-          >
-            Delete
-          </button>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
 
 
