@@ -51,6 +51,7 @@ const editUser = async () => {
     }
 };
 
+// For Edit Line Token
 const editLineToken = async () => {
     try {
         const response = await deviceStore.editLineToken(user.lineToken);
