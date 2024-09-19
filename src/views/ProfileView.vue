@@ -129,7 +129,6 @@ const editLineToken = async () => {
                         </div>
                     </div>
                 </div>
-                <!-- Button Aligned to the Right -->
                 <div class="flex justify-end">
                     <button
                         class="bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition shadow-md text-lg"
@@ -139,11 +138,9 @@ const editLineToken = async () => {
                 </div>
             </div>
 
-            <!-- Notification Section -->
             <div class="mb-8">
                 <h2 class="text-3xl font-bold mb-6">Notification</h2>
                 <hr class="mb-8" />
-                <!-- Notification Form -->
                 <div class="flex items-center gap-6 mb-6">
                     <img src="../assets/LINE_logo.png" alt="Line" class="w-20 h-20 object-contain" />
                     <div class="flex-grow">

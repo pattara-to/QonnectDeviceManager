@@ -69,9 +69,6 @@ const editAlert = async () => {
                 <option value="1" :class="statuses[3] == 1 ? 'hidden' : 'block'" class="text-green-500">ON</option>
             </select>
         </div>
-        <div class="w-32 flex justify-center">
-            <input type="color" v-model="color" class="w-16 h-8" />
-        </div>
         <input type="text" v-model="alert.AlertMessage" class="w-1/5 p-1 pl-4 bg-gray-200 rounded-xl" />
 
         <div class="text-2xl w-24 flex justify-around">

@@ -168,7 +168,7 @@ const removeAlert = async (alertID) => {
           <div class="w-20">I3</div>
           <div class="w-20">I4</div>
         </div>
-        <div class="w-32">AlertColor</div>
+
         <div class="w-1/5">AlertName</div>
         <div class="w-24"></div>
       </div>
@@ -197,11 +197,6 @@ const removeAlert = async (alertID) => {
             <option value="1" class="text-green-500">ON</option>
           </select>
         </div>
-
-        <div class="w-32 flex justify-center">
-          <input type="color" v-model="color" class="w-16 h-8" />
-        </div>
-
         <input type="text" class="w-1/5 p-1 pl-4 bg-gray-200 rounded-xl" v-model="alert_message"
           placeholder="Alert Message" />
         <button
