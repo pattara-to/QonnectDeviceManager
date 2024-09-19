@@ -105,12 +105,12 @@ const removeAlert = async (alertID) => {
     </div>
 
     <!-- Device Info Section -->
-    <div class="w-4/5 h-1/2 shadow-md my-2 mx-auto rounded-2xl transition-all duration-300 hover:shadow-lg">
-      <div class="flex">
-        <div class="w-1/5 m-4 p-4 bg-white rounded-lg flex items-center">
+    <div class="w-[70%] h-1/2 transition-all duration-300 mx-auto mt-3">
+      <div class="grid grid-cols2 gap-1 bg-red-200">
+        <div class="w-1/5 m-4 p-4 bg-white rounded-lg flex items-center bg-orange-400">
           <img src="../assets/machine.png" alt="machine" class="w-full" />
         </div>
-        <div class="m-4">
+        <div class="m-4 bg-yellow-400">
           <div>
             <span class="p-2 text-2xl">
               <span class="font-semibold my-4">Machine Name:</span>
