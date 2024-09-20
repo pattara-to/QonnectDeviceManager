@@ -29,13 +29,14 @@ const closeModalOnOutsideClick = (event) => {
 <template>
     <div class="modal block fixed z-1 w-full h-full bg-black/70" @click="closeModalOnOutsideClick">
         <transition name="slide">
-            <div v-if="props.modalIsOpen"
+            <div
+                v-if="props.modalIsOpen"
                 class="modal-content p-8 rounded-xl shadow-lg bg-white fixed right-0 h-[93%] w-[90%] md:w-[30%] flex flex-col items-center overflow-auto transition-all duration-500"
-                @click.stop>
-                
+                @click.stop
+            >
                 <!-- Add Device Title -->
                 <h2 class="text-2xl font-bold text-gray-800 mb-6">Add Device</h2>
-                
+
                 <!-- Device Image -->
                 <img src="../assets/machine.png" alt="machine" class="w-40 h-auto my-[3rem] object-cover" />
 
@@ -44,34 +45,59 @@ const closeModalOnOutsideClick = (event) => {
                     <!-- Machine Name -->
                     <div class="flex flex-col w-full">
                         <label class="font-semibold text-gray-700">Machine Name</label>
-                        <input type="text" v-model="deviceData.name" class="bg-gray-100 border border-gray-300 rounded-lg py-2 px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" required/>
+                        <input
+                            type="text"
+                            v-model="deviceData.name"
+                            class="bg-gray-100 border border-gray-300 rounded-lg py-2 px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                            required
+                        />
                     </div>
 
                     <!-- MAC Address -->
                     <div class="flex flex-col w-full">
                         <label class="font-semibold text-gray-700">MAC Address</label>
-                        <input type="text" v-model="deviceData.MAC" class="bg-gray-100 border border-gray-300 rounded-lg py-2 px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full" />
+                        <input
+                            type="text"
+                            v-model="deviceData.MAC"
+                            class="bg-gray-100 border border-gray-300 rounded-lg py-2 px-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                        />
                     </div>
 
                     <!-- Description -->
                     <div class="flex flex-col w-full">
                         <label class="font-semibold text-gray-700">Description</label>
-                        <textarea v-model="deviceData.description" rows="4" class="bg-gray-100 border border-gray-300 rounded-lg py-2 px-3 mt-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"></textarea>
+                        <textarea
+                            v-model="deviceData.description"
+                            rows="4"
+                            class="bg-gray-100 border border-gray-300 rounded-lg py-2 px-3 mt-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                        ></textarea>
                     </div>
 
                     <!-- Location -->
                     <div class="flex flex-col w-full">
                         <label class="font-semibold text-gray-700">Location</label>
-                        <textarea v-model="deviceData.location" rows="4" class="bg-gray-100 border border-gray-300 rounded-lg py-2 px-3 mt-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"></textarea>
+                        <textarea
+                            v-model="deviceData.location"
+                            rows="4"
+                            class="bg-gray-100 border border-gray-300 rounded-lg py-2 px-3 mt-1 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+                        ></textarea>
                     </div>
                 </div>
 
                 <!-- Buttons -->
                 <div class="flex justify-end w-full mt-6 space-x-4">
-                    <button class="px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition"
-                        @click="props.toggleModal">Cancel</button>
-                    <button class="px-4 py-2 border border-green-500 text-green-500 rounded-lg hover:bg-green-500 hover:text-white transition"
-                        @click="addDevice()">Add</button>
+                    <button
+                        class="px-4 py-2 border border-red-500 text-red-500 rounded-lg hover:bg-red-500 hover:text-white transition"
+                        @click="props.toggleModal"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        class="px-4 py-2 border border-green-500 text-green-500 rounded-lg hover:bg-green-500 hover:text-white transition"
+                        @click="addDevice()"
+                    >
+                        Add
+                    </button>
                 </div>
             </div>
         </transition>
