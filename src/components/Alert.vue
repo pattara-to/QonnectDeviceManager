@@ -30,50 +30,46 @@ const editAlert = async () => {
 </script>
 
 <template>
-    <div class="flex justify-around">
-        <div class="flex justify-between w-2/4">
-            <select
-                v-model="statuses[0]"
-                id="i0"
-                class="w-20 h-8 text-center rounded-xl"
-                :class="statuses[0] == 1 ? 'text-green-500' : 'text-red-500'"
-            >
-                <option value="0" :class="statuses[0] == 0 ? 'hidden' : 'block'" class="text-red-500">OFF</option>
-                <option value="1" :class="statuses[0] == 1 ? 'hidden' : 'block'" class="text-green-500">ON</option>
-            </select>
-            <select
-                v-model="statuses[1]"
-                id="i0"
-                class="w-20 h-8 text-center rounded-xl"
-                :class="statuses[1] == 1 ? 'text-green-500' : 'text-red-500'"
-            >
-                <option value="0" :class="statuses[1] == 0 ? 'hidden' : 'block'" class="text-red-500">OFF</option>
-                <option value="1" :class="statuses[1] == 1 ? 'hidden' : 'block'" class="text-green-500">ON</option>
-            </select>
-            <select
-                v-model="statuses[2]"
-                id="i0"
-                class="w-20 h-8 text-center rounded-xl"
-                :class="statuses[2] == 1 ? 'text-green-500' : 'text-red-500'"
-            >
-                <option value="0" :class="statuses[2] == 0 ? 'hidden' : 'block'" class="text-red-500">OFF</option>
-                <option value="1" :class="statuses[2] == 1 ? 'hidden' : 'block'" class="text-green-500">ON</option>
-            </select>
-            <select
-                v-model="statuses[3]"
-                id="i0"
-                class="w-20 h-8 text-center rounded-xl"
-                :class="statuses[3] == 1 ? 'text-green-500' : 'text-red-500'"
-            >
-                <option value="0" :class="statuses[3] == 0 ? 'hidden' : 'block'" class="text-red-500">OFF</option>
-                <option value="1" :class="statuses[3] == 1 ? 'hidden' : 'block'" class="text-green-500">ON</option>
-            </select>
-        </div>
-        <input type="text" v-model="alert.AlertMessage" class="w-1/5 p-1 pl-4 bg-gray-200 rounded-xl" />
+        <div class="flex justify-around items-center mb-2">
+            <div class="flex justify-between w-1/2">
+                <select
+                    v-model="statuses[0]"
+                    class="w-16 h-6 text-center rounded-lg"
+                    :class="statuses[0] == 1 ? 'text-green-500' : 'text-red-500'"
+                >
+                    <option value="0" class="text-red-500">OFF</option>
+                    <option value="1" class="text-green-500">ON</option>
+                </select>
+                <select
+                    v-model="statuses[1]"
+                    class="w-16 h-6 text-center rounded-lg"
+                    :class="statuses[1] == 1 ? 'text-green-500' : 'text-red-500'"
+                >
+                    <option value="0" class="text-red-500">OFF</option>
+                    <option value="1" class="text-green-500">ON</option>
+                </select>
+                <select
+                    v-model="statuses[2]"
+                    class="w-16 h-6 text-center rounded-lg"
+                    :class="statuses[2] == 1 ? 'text-green-500' : 'text-red-500'"
+                >
+                    <option value="0" class="text-red-500">OFF</option>
+                    <option value="1" class="text-green-500">ON</option>
+                </select>
+                <select
+                    v-model="statuses[3]"
+                    class="w-16 h-6 text-center rounded-lg"
+                    :class="statuses[3] == 1 ? 'text-green-500' : 'text-red-500'"
+                >
+                    <option value="0" class="text-red-500">OFF</option>
+                    <option value="1" class="text-green-500">ON</option>
+                </select>
+            </div>
+            <input type="text" v-model="alert.AlertMessage" class="w-1/4 p-1 pl-2 bg-gray-200 rounded-lg" />
 
-        <div class="text-2xl w-24 flex justify-around">
-            <button @click="editAlert()"><i class="bi bi-pencil-square"></i></button>
-            <button @click="props.removeAlert(alert.AlertID)"><i class="bi bi-trash w-20"></i></button>
+            <div class="text-lg w-16 flex justify-around">
+                <button @click="editAlert()"><i class="bi bi-pencil-square"></i></button>
+                <button @click="props.removeAlert(alert.AlertID)"><i class="bi bi-trash"></i></button>
+            </div>
         </div>
-    </div>
 </template>

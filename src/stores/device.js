@@ -147,6 +147,7 @@ export const useDeviceStore = defineStore("device", {
                 const response = await axios.post(`${BASE_URL}/edit-user`, userData, {
                     headers: {
                         authorization: `Bearer ${authToken}`,
+                        'Content-Type': 'application/json',
                     },
                 });
             } catch (error) {
@@ -155,11 +156,12 @@ export const useDeviceStore = defineStore("device", {
                     window.location.replace("http://localhost:5173/login");
                 }
             }
-        },
+        }
+        ,
         async editLineToken(lineToken) {
             try {
                 const authToken = localStorage.getItem("token");
-                const response = await axios.post(`${BASE_URL}/edit-linetoken`, userData, {
+                const response = await axios.post(`${BASE_URL}/edit-linetoken`,lineToken, {
                     headers: {
                         authorization: `Bearer ${authToken}`,
                     },

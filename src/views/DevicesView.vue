@@ -29,20 +29,22 @@ const addDevice = async (deviceData) => {
 
 <template>
   <Navbar />
+  
   <AddModal :toggleModal="toggleModal" :addDevice="addDevice" :modalIsOpen="modalIsOpen" v-show="modalIsOpen" />
+  
   <div class="flex flex-col h-[93%]">
     <div class="flex justify-between items-center my-6 px-16">
-      <h1 class="text-2xl font-semibold text-gray-800">Devices</h1>
+      <h1 class="text-3xl font-semibold text-gray-800">Devices</h1>
       <button
         @click="toggleModal"
-        class="rounded-lg px-3 py-1 text-m font-medium text-white bg-blue-500 hover:bg-blue-600 transition duration-200"
+        class="rounded-lg px-6 py-2 text-lg font-medium text-white bg-[#008cba] hover:bg-[#0079a1] transition"
       >
         + Add Device
       </button>
     </div>
 
-    <div class="grid grid-cols-5 gap-7 mx-16 mb-2">
-      <Machine class="h-1/2" :device="device" v-for="device in deviceStore.list" :key="device.id" />
+    <div class="grid grid-cols-6 gap-6 mx-16 mb-6">
+      <Machine :device="device" v-for="device in deviceStore.list" :key="device.id" />
     </div>
   </div>
 </template>
