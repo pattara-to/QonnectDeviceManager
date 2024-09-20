@@ -7,7 +7,6 @@ const props = defineProps({
   modalIsOpen: Boolean,
 });
 
-// Initial form data
 const initialDeviceData = {
   name: "",
   MAC: "",
@@ -22,8 +21,8 @@ const addDevice = () => {
     alert("Please fill in all required fields.");
     return;
   }
-  props.addDevice(deviceData); // Proceed to add device if validation passes
-  resetForm(); // Reset form after adding device
+  props.addDevice(deviceData); 
+  resetForm(); 
 };
 
 const closeModalOnOutsideClick = (event) => {
@@ -33,15 +32,13 @@ const closeModalOnOutsideClick = (event) => {
   }
 };
 
-// Function to reset the form data
 const resetForm = () => {
   Object.assign(deviceData, { ...initialDeviceData });
 };
 
-// Watch for modal open/close and reset form when closed
 watch(() => props.modalIsOpen, (newVal) => {
   if (!newVal) {
-    resetForm(); // Reset the form when the modal is closed
+    resetForm(); 
   }
 });
 </script>
@@ -57,7 +54,6 @@ watch(() => props.modalIsOpen, (newVal) => {
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Add Device</h2>
         <img src="../assets/machine.png" alt="machine" class="w-32 h-auto mb-4 object-cover" />
 
-        <!-- Form Starts Here -->
         <form @submit.prevent="addDevice" class="w-full space-y-3 flex-grow">
           <div class="flex flex-col w-full">
             <label class="font-medium text-gray-700 text-sm">Machine Name</label>
@@ -98,7 +94,6 @@ watch(() => props.modalIsOpen, (newVal) => {
             ></textarea>
           </div>
 
-          <!-- Buttons -->
           <div class="flex justify-end w-full mt-4 space-x-3">
             <button type="submit" class="px-3 py-2 border border-green-500 text-green-500 rounded-md hover:bg-green-500 hover:text-white transition">
               Add
